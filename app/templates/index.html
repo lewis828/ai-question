@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %}上传 & 生成{% endblock %}
+{% block body %}
+<nav class="navbar">
+  <a href="/" class="nav-logo">
+    <div class="logo-box"><i data-lucide="brain-circuit" style="width:18px;height:18px"></i></div>
+    QuizAI
+  </a>
+  <div class="nav-links">
+    <a href="/" class="active">功能</a>
+    <a href="/banks">我的题库</a>
+    <a href="/wrong">错题本</a>
+  </div>
+  <a href="/banks" class="btn btn-primary">进入题库</a>
+</nav>
+
+<section class="hero-layout">
+  <div class="hero-left">
+    <span class="badge"><i data-lucide="sparkles" style="width:13px;height:13px"></i> AI 智能出题系统</span>
+    <h1>上传资料，秒出题库</h1>
+    <p>支持教材、PPT、PDF、Word 等主流格式，AI 自动解析内容，智能生成单选、多选、判断题，帮你高效备考。</p>
+    <div class="stats-row">
+      <div><div class="stat-num" id="statGenerated">0</div><div class="stat-label">累积已生成</div></div>
+      <div><div class="stat-num">98%</div><div class="stat-label">题目准确率</div></div>
+      <div><div class="stat-num">3s</div><div class="stat-label">平均生成时间</div></div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="upload-card">
+      <div class="upload-card-head">
+        <strong>导入题库</strong>
+        <span class="upload-card-formats">Excel · JSON</span>
+      </div>
+
+      <div class="drop-zone" id="dropZone">
+        <input type="file" id="fileInput" accept=".xlsx,.xlsm,.json" />
+        <i data-lucide="upload" style="width:32px;height:32px;color:var(--accent);margin-bottom:12px"></i>
+        <p style="font-weight:500;margin-bottom:6px">拖拽文件到此处，或点击选择</p>
+        <p style="font-size:12px;color:var(--fg-secondary)">支持最大 50MB，单次最多 10 个文件</p>
+      </div>
+
+      <div class="file-list" id="fileList"></div>
+
+      <div class="upload-field-row">
+        <label class="upload-field-label" for="bankTitle">题库名称（可选）</label>
+        <input type="text" id="bankTitle" class="upload-field-input" placeholder="例如：高数期末复习" />
+      </div>
+      <div class="upload-field-row">
+        <label class="upload-field-label" for="bankCategory">题库分类</label>
+        <input
+          type="text"
+          id="bankCategory"
+          class="upload-field-input"
+          list="uploadCategoryList"
+          placeholder="输入或选择分类"
+          value="AI生成"
+          maxlength="100"
+          autocomplete="off"
+        />
+        <datalist id="uploadCategoryList"></datalist>
+      </div>
+
+      <button class="gen-btn" id="genBtn" disabled>
+        <i data-lucide="upload" style="width:18px;height:18px"></i>
+        导入题库
+      </button>
+    </div>
+
+    <div class="hint-row hint-row--spaced">
+      <span><i data-lucide="shield" style="width:14px"></i> 数据安全加密</span>
+      <span><i data-lucide="layers" style="width:14px"></i> 多种题型支持</span>
+      <span><i data-lucide="bookmark" style="width:14px"></i> 支持错题收藏</span>
+    </div>
+  </div>
+</section>
+
+<div class="loading-overlay" id="loading">
+  <div class="loading-box">
+    <div class="spinner"></div>
+    <p id="loadingText">正在导入题库…</p>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/upload.js"></script>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}刷题{% endblock %}
+{% block body %}
+<div class="practice-layout">
+  <aside class="practice-sidebar" id="bankSidebar">
+    <div class="nav-logo" style="margin-bottom:8px">
+      <div class="logo-box"><i data-lucide="brain-circuit" style="width:18px;height:18px"></i></div>
+      QuizAI
+    </div>
+    <div style="font-size:12px;font-weight:600;color:var(--fg-secondary)">题库</div>
+    <div id="bankNavList"></div>
+    <div style="height:1px;background:var(--fg-muted);opacity:0.4;margin:8px 0"></div>
+    <div style="font-size:12px;font-weight:600;color:var(--fg-secondary)">错题本</div>
+    <a href="/wrong" class="practice-nav-item" id="wrongNav" style="justify-content:space-between">
+      错题 <span id="wrongBadge" style="background:var(--error);color:white;padding:2px 8px;border-radius:99px;font-size:11px">0</span>
+    </a>
+  </aside>
+
+  <div class="practice-main">
+    <div class="top-bar">
+      <div class="breadcrumb" id="breadcrumb" style="font-size:14px;color:var(--fg-secondary)">加载中…</div>
+      <div style="display:flex;align-items:center;gap:16px">
+        <span id="progressText" style="font-size:14px;color:var(--fg-secondary)">第 0 / 0 题</span>
+        <a href="/banks" class="btn btn-ghost" style="height:36px">退出练习</a>
+      </div>
+    </div>
+
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill" style="width:0%"></div>
+    </div>
+
+    <div class="practice-grid">
+      <div class="question-card" id="questionArea">
+        <span class="type-badge" id="typeBadge">单选题</span>
+        <p class="question-text" id="questionText">加载题目中…</p>
+        <div class="options-group" id="optionsGroup"></div>
+        <div class="explanation-box" id="explanationBox"></div>
+        <div class="action-row">
+          <button class="btn btn-ghost" id="prevBtn">上一题</button>
+          <button class="btn btn-primary" id="submitBtn">提交答案</button>
+          <button class="btn btn-ghost" id="nextBtn">下一题</button>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="timer-card">
+          <div class="timer-time" id="timerDisplay">00:00</div>
+          <div class="timer-caption">答题时间</div>
+        </div>
+        <div class="answer-sheet">
+          <h4>答题卡</h4>
+          <div class="sheet-grid" id="sheetGrid"></div>
+        </div>
+        <button class="btn btn-accent-light" id="bookmarkBtn" style="width:100%;padding:16px;border-radius:16px">
+          <i data-lucide="bookmark" style="width:20px"></i> 手动收藏此题
+        </button>
+        <p style="font-size:11px;color:var(--fg-secondary);text-align:center;line-height:1.4">答错的题目会自动加入错题本</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+{% endblock %}
+{% block scripts %}
+<script>const BANK_ID = {{ bank_id }};</script>
+<script src="/static/js/practice.js"></script>
+{% endblock %}

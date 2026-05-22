@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}错题本{% endblock %}
+{% block body %}
+<nav class="navbar">
+  <a href="/" class="nav-logo">
+    <div class="logo-box"><i data-lucide="brain-circuit" style="width:18px;height:18px"></i></div>
+    QuizAI
+  </a>
+  <div class="nav-links">
+    <a href="/">功能</a>
+    <a href="/banks">我的题库</a>
+    <a href="/wrong" class="active">错题本</a>
+  </div>
+  <a href="/" class="btn btn-primary"><i data-lucide="plus" style="width:14px"></i> 新建题库</a>
+</nav>
+
+<div class="page-body page-body--wrong">
+  <aside class="sidebar wrong-sidebar" id="wrongSidebar">
+    <div class="sidebar-title">题库来源</div>
+    <div class="side-item side-item-all active" data-bank-id="">
+      <span class="side-item-left">
+        <i data-lucide="layers"></i>
+        <span>全部来源</span>
+      </span>
+      <span class="side-item-count" id="allWrongCount">0</span>
+    </div>
+    <div class="sidebar-spacer"></div>
+    <a href="/banks" class="side-wrong wrong-back-link">
+      <i data-lucide="arrow-left"></i>
+      <span>返回题库</span>
+    </a>
+  </aside>
+
+  <main class="main-content wrong-main">
+    <div class="wrong-top-bar">
+      <div class="wrong-title-group">
+        <i data-lucide="bookmark" class="wrong-title-icon"></i>
+        <h1 class="wrong-page-title">错题本</h1>
+        <span class="wrong-count-badge" id="wrongCountBadge">0 道错题</span>
+      </div>
+      <div class="wrong-top-actions">
+        <div class="search-box wrong-search-box">
+          <i data-lucide="search" style="width:14px;color:var(--fg-secondary)"></i>
+          <input type="text" id="wrongSearchInput" placeholder="搜索题目、题库、答案…" />
+        </div>
+        <div class="wrong-filter-pills" id="wrongFilterPills">
+          <button type="button" class="wrong-pill active" data-sort="all">全部</button>
+          <button type="button" class="wrong-pill" data-sort="recent">最近</button>
+          <button type="button" class="wrong-pill" data-sort="freq">高频</button>
+        </div>
+        <button type="button" class="wrong-recite-btn" id="startReciteBtn" disabled>
+          <i data-lucide="brain"></i>
+          背题
+        </button>
+      </div>
+    </div>
+
+    <div class="wrong-list" id="wrongList"></div>
+
+    <div class="wrong-empty" id="emptyState">
+      <i data-lucide="party-popper" class="wrong-empty-icon" id="emptyStateIcon"></i>
+      <p class="wrong-empty-title" id="emptyStateTitle">太棒了！暂无错题记录</p>
+      <p class="wrong-empty-desc" id="emptyStateDesc">继续保持，去刷题巩固知识吧</p>
+      <a href="/banks" class="btn btn-primary">去刷题</a>
+    </div>
+  </main>
+</div>
+<div class="toast" id="toast"></div>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/wrong.js"></script>
+{% endblock %}

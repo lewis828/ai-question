@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}背题模式{% endblock %}
+{% block body %}
+<nav class="navbar">
+  <a href="/" class="nav-logo">
+    <div class="logo-box"><i data-lucide="brain-circuit" style="width:18px;height:18px"></i></div>
+    QuizAI
+  </a>
+  <div class="nav-links">
+    <a href="/">功能</a>
+    <a href="/banks">我的题库</a>
+    <a href="/wrong" class="active">错题本</a>
+  </div>
+  <a href="/" class="btn btn-primary"><i data-lucide="plus" style="width:14px"></i> 新建题库</a>
+</nav>
+
+<div class="page-body page-body--wrong page-body--recite">
+  <aside class="sidebar wrong-sidebar" id="wrongSidebar">
+    <div class="sidebar-title">题库来源</div>
+    <div class="side-item side-item-all active" data-bank-id="">
+      <span class="side-item-left">
+        <i data-lucide="layers"></i>
+        <span>全部来源</span>
+      </span>
+      <span class="side-item-count" id="allWrongCount">0</span>
+    </div>
+    <div class="sidebar-spacer"></div>
+    <a href="/banks" class="side-wrong wrong-back-link">
+      <i data-lucide="arrow-left"></i>
+      <span>返回题库</span>
+    </a>
+  </aside>
+
+  <main class="main-content wrong-main recite-main">
+    <div class="wrong-top-bar recite-top-bar">
+      <div class="wrong-title-group">
+        <i data-lucide="brain" class="recite-title-icon"></i>
+        <h1 class="wrong-page-title">背题模式</h1>
+        <span class="recite-progress-badge" id="reciteProgress">0 / 0</span>
+      </div>
+      <a href="/wrong" class="recite-exit-btn" id="exitReciteBtn">退出背题</a>
+    </div>
+
+    <div class="wrong-list recite-list" id="reciteList">
+      <div class="recite-load-sentinel" id="reciteSentinel">
+        <span class="recite-loading" id="reciteLoading" hidden>加载中…</span>
+        <span class="recite-load-end" id="reciteLoadEnd" hidden>已加载全部错题</span>
+      </div>
+    </div>
+
+    <div class="wrong-empty recite-empty" id="reciteEmpty">
+      <i data-lucide="party-popper" class="wrong-empty-icon"></i>
+      <p class="wrong-empty-title">太棒了！错题已全部掌握</p>
+      <p class="wrong-empty-desc">继续保持，去刷题巩固知识吧</p>
+      <a href="/wrong" class="btn btn-primary">返回错题本</a>
+    </div>
+  </main>
+</div>
+<div class="toast" id="toast"></div>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/wrong_recite.js"></script>
+{% endblock %}

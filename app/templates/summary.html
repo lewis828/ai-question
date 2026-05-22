@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}练习总结{% endblock %}
+{% block body %}
+<nav class="navbar">
+  <a href="/" class="nav-logo">
+    <div class="logo-box"><i data-lucide="brain-circuit" style="width:18px;height:18px"></i></div>
+    QuizAI
+  </a>
+  <div class="nav-links">
+    <a href="/">功能</a>
+    <a href="/banks">我的题库</a>
+    <a href="/wrong">错题本</a>
+  </div>
+</nav>
+
+<main class="summary-page">
+  <div class="summary-header">
+    <span class="summary-badge" id="summaryBadge">✓ 练习完成</span>
+    <h1 class="summary-title" id="summaryTitle">加载中…</h1>
+    <p class="summary-subtitle" id="summarySubtitle"></p>
+  </div>
+
+  <div class="summary-stats" id="summaryStats"></div>
+
+  <section class="summary-wrong-section" id="wrongSection" style="display:none">
+    <h2 class="summary-section-title">本次错题（已自动加入错题本）</h2>
+    <div class="summary-wrong-list" id="wrongList"></div>
+  </section>
+
+  <div class="summary-actions">
+    <a href="/banks" class="btn btn-ghost">返回题库</a>
+    <a href="/wrong" class="btn btn-ghost" id="wrongLink">查看错题本</a>
+    <a href="#" class="btn btn-primary" id="retryBtn">再练一次</a>
+  </div>
+</main>
+<div class="toast" id="toast"></div>
+{% endblock %}
+{% block scripts %}
+<script>const SESSION_ID = {{ session_id }};</script>
+<script src="/static/js/summary.js"></script>
+{% endblock %}
