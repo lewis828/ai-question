@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-question-skill.local/schemas/skill.manifest.v1.json",
+  "title": "AI Question Skill Manifest",
+  "type": "object",
+  "required": [
+    "manifestVersion",
+    "kind",
+    "name",
+    "version",
+    "description",
+    "entryPoint",
+    "capabilities"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "manifestVersion": { "type": "string" },
+    "kind": {
+      "type": "string",
+      "enum": ["instruction", "instruction-bundle", "action"]
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "version": { "type": "string" },
+    "displayName": { "type": "string" },
+    "description": { "type": "string", "maxLength": 1024 },
+    "entryPoint": { "type": "string", "const": "SKILL.md" },
+    "slashCommand": { "type": "string" },
+    "disableModelInvocation": { "type": "boolean" },
+    "license": { "type": "string" },
+    "metadata": { "type": "object" },
+    "compatibility": { "type": "object" },
+    "install": { "type": "object" },
+    "triggers": { "type": "object" },
+    "capabilities": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "mode"],
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "mode": {
+            "type": "string",
+            "enum": ["agent-instruction", "script"]
+          },
+          "summary": { "type": "string" },
+          "workflow": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "script": { "type": "string" },
+          "healthCheck": { "type": "string", "format": "uri" },
+          "forbidden": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "resources": { "type": "array" },
+    "scripts": { "type": "array" },
+    "services": { "type": "object" },
+    "defaults": { "type": "object" },
+    "supportedInputFormats": { "type": "object" }
+  }
+}
